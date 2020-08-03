@@ -20,13 +20,25 @@
 				<version>3.1.2</version>
 				<executions>
 					<execution>
-						<id>unpack-openapi-dependencies</id>
+						<id>unpack-swagger-2.0-dependencies</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>unpack-dependencies</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>src/main/openapi</outputDirectory>
+							<includeClassifiers>swagger-2.0</includeClassifiers>
+							<outputDirectory>src/main/swagger-2.0</outputDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>unpack-openapi-3.0-dependencies</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<configuration>
+							<includeClassifiers>openapi-3.0</includeClassifiers>
+							<outputDirectory>src/main/openapi-3.0</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
@@ -38,7 +50,8 @@
 				<configuration>
 					<filesets>
 						<fileset>
-							<directory>src/main/openapi/problem</directory>
+							<directory>src/main/swagger-2.0/problem</directory>
+							<directory>src/main/openapi-3.0/problem</directory>
 						</fileset>
 					</filesets>
 				</configuration>
@@ -46,7 +59,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>3.3.0</version>
 				<executions>
 					<execution>
 						<id>create-distribution</id>
@@ -55,9 +68,10 @@
 							<goal>single</goal>
 						</goals>
 						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
+							<appendAssemblyId>true</appendAssemblyId>
 							<descriptors>
-								<descriptor>src/main/assembly/zip.xml</descriptor>
+								<descriptor>src/main/assembly/swagger-2.0.xml</descriptor>
+								<descriptor>src/main/assembly/openapi-3.0.xml</descriptor>
 							</descriptors>
 						</configuration>
 					</execution>
@@ -70,7 +84,17 @@
 			<groupId>io.github.belgif.openapi</groupId>
 			<artifactId>belgif-openapi-problem</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
+			<classifier>swagger-2.0</classifier>
 			<type>zip</type>
+			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>io.github.belgif.openapi</groupId>
+			<artifactId>belgif-openapi-problem</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+			<classifier>openapi-3.0</classifier>
+			<type>zip</type>
+			<optional>true</optional>
+		</dependency>		
 	</dependencies>
 </project>
