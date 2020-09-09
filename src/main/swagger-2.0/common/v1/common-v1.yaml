@@ -2,7 +2,43 @@ swagger: "2.0"
 info:
   title: common technical data types
   version: 1.0.0
-paths: {}
+paths:
+  /health:
+    get:
+      tags:
+        - Monitoring
+      summary: Check health of the service
+      description: This resource is only available to supervision users
+      operationId: checkHealth
+      externalDocs:
+        url: https://www.gcloud.belgium.be/rest/#health
+      produces:
+        - application/json
+      security: []
+      responses:
+        "200":
+          description: The service is UP or DEGRADED
+          schema:
+            $ref: "#/definitions/HealthStatus"
+          examples:
+            application/json:
+              {
+                "status": "UP"
+              }
+        "500":
+          description: The service cannot generate a health response.
+          schema:
+            $ref: "../../problem/v1/problem-v1.yaml#/definitions/Problem"
+        "503":
+          description: The service is DOWN
+          schema:
+            $ref: "#/definitions/HealthStatus"
+          examples: {
+            "application/json":
+              {
+                "status": "DOWN"
+              }
+          }
 parameters:
   LangQueryParameter:
     in: query
@@ -91,3 +127,12 @@ definitions:
     description: Universally Unique Identifier, as standardized in RFC 4122 and ISO/IEC 9834-8
     type: string
     pattern: '^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$'
+  HealthStatus:
+    description: Response message for the API health
+    type: object
+    properties:
+      status:
+        description: 'Level indicating the health status of the service: UP (functioning as expected), DOWN (suffering unexpected failures), DEGRADED (partly unavailable but service can be continued with reduced functionality), or a custom status value'
+        type: string
+    required:
+      - status
