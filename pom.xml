@@ -20,25 +20,37 @@
 				<version>3.1.2</version>
 				<executions>
 					<execution>
-						<id>unpack-swagger-2.0-dependencies</id>
+						<id>unpack-swagger-dependencies</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>unpack-dependencies</goal>
 						</goals>
 						<configuration>
-							<includeClassifiers>swagger-2.0</includeClassifiers>
-							<outputDirectory>src/main/swagger-2.0</outputDirectory>
+							<includeClassifiers>swagger</includeClassifiers>
+							<outputDirectory>src/main/swagger</outputDirectory>
+							<fileMappers>
+								<org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+									<pattern>belgif/</pattern>
+									<replacement>./</replacement>
+								</org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+							</fileMappers>
 						</configuration>
 					</execution>
 					<execution>
-						<id>unpack-openapi-3.0-dependencies</id>
+						<id>unpack-openapi-dependencies</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>unpack-dependencies</goal>
 						</goals>
 						<configuration>
-							<includeClassifiers>openapi-3.0</includeClassifiers>
-							<outputDirectory>src/main/openapi-3.0</outputDirectory>
+							<includeClassifiers>openapi</includeClassifiers>
+							<outputDirectory>src/main/openapi</outputDirectory>
+							<fileMappers>
+								<org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+									<pattern>belgif/</pattern>
+									<replacement>./</replacement>
+								</org.codehaus.plexus.components.io.filemappers.RegExpFileMapper>
+							</fileMappers>
 						</configuration>
 					</execution>
 				</executions>
@@ -50,8 +62,8 @@
 				<configuration>
 					<filesets>
 						<fileset>
-							<directory>src/main/swagger-2.0/problem</directory>
-							<directory>src/main/openapi-3.0/problem</directory>
+							<directory>src/main/swagger/problem</directory>
+							<directory>src/main/openapi/problem</directory>
 						</fileset>
 					</filesets>
 				</configuration>
@@ -70,8 +82,8 @@
 						<configuration>
 							<appendAssemblyId>true</appendAssemblyId>
 							<descriptors>
-								<descriptor>src/main/assembly/swagger-2.0.xml</descriptor>
-								<descriptor>src/main/assembly/openapi-3.0.xml</descriptor>
+								<descriptor>src/main/assembly/swagger.xml</descriptor>
+								<descriptor>src/main/assembly/openapi.xml</descriptor>
 							</descriptors>
 						</configuration>
 					</execution>
@@ -84,7 +96,7 @@
 			<groupId>io.github.belgif.openapi</groupId>
 			<artifactId>belgif-openapi-problem</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
-			<classifier>swagger-2.0</classifier>
+			<classifier>swagger</classifier>
 			<type>zip</type>
 			<optional>true</optional>
 		</dependency>
@@ -92,7 +104,7 @@
 			<groupId>io.github.belgif.openapi</groupId>
 			<artifactId>belgif-openapi-problem</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
-			<classifier>openapi-3.0</classifier>
+			<classifier>openapi</classifier>
 			<type>zip</type>
 			<optional>true</optional>
 		</dependency>		
