@@ -21,10 +21,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
-              example:
-                {
-                  "status": "UP"
-                }
+              examples:
+                responseUp:
+                  value:
+                    {
+                      "status": "UP"
+                    }
+                responseDegraded:
+                  value:
+                    {
+                      "status": "DEGRADED"
+                    }
         "500":
           description: The service cannot generate a health response.
           content:
@@ -37,10 +44,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
-              example:
-                {
-                  "status": "DOWN"
-                }
+              examples:
+                responseDown:
+                  value:
+                    {
+                      "status": "DOWN"
+                    }
 components:
   parameters:
     LangQueryParameter:
