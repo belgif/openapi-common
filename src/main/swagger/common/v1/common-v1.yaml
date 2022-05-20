@@ -11,7 +11,7 @@ paths:
       description: This resource is only available to supervision users
       operationId: checkHealth
       externalDocs:
-        url: "https://www.gcloud.belgium.be/rest/#health"
+        url: "https://www.belgif.be/specification/rest/api-guide/#health"
       produces:
         - application/json
       security: []
