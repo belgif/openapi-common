@@ -6,7 +6,7 @@
 
 	<groupId>io.github.belgif.openapi</groupId>
 	<artifactId>belgif-openapi-common</artifactId>
-	<version>1.2.0-SNAPSHOT</version>
+	<version>1.2.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>${project.groupId}:${project.artifactId}</name>
@@ -121,7 +121,7 @@
 		<dependency>
 			<groupId>io.github.belgif.openapi</groupId>
 			<artifactId>belgif-openapi-problem</artifactId>
-			<version>1.2.0</version>
+			<version>1.2.1</version>
 			<classifier>swagger</classifier>
 			<type>zip</type>
 			<optional>true</optional>
@@ -129,7 +129,7 @@
 		<dependency>
 			<groupId>io.github.belgif.openapi</groupId>
 			<artifactId>belgif-openapi-problem</artifactId>
-			<version>1.2.0</version>
+			<version>1.2.1</version>
 			<classifier>openapi</classifier>
 			<type>zip</type>
 			<optional>true</optional>
