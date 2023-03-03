@@ -2,3 +2,4 @@
 /.settings
 .project
 /src/main/**/problem
+/.idea/

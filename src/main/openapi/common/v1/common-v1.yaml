@@ -32,12 +32,6 @@ paths:
                     {
                       "status": "DEGRADED"
                     }
-        "500":
-          description: The service cannot generate a health response.
-          content:
-            application/json:
-              schema:
-                $ref: "../../problem/v1/problem-v1.yaml#/components/schemas/Problem"
         "503":
           description: The service is DOWN
           content:
@@ -50,17 +44,15 @@ paths:
                     {
                       "status": "DOWN"
                     }
+        default:
+          $ref: "../../problem/v1/problem-v1.yaml#/components/responses/ProblemResponse"
 components:
   parameters:
     LangQueryParameter:
       in: query
       name: lang
       schema:
-        type: string
-        enum:
-          - fr
-          - nl
-          - de
+        $ref: "#/components/schemas/BelgianLanguage"
     PageQueryParameter:
       description: Number of requested page in a paged resource collection. Page numbers are 1-based.
       in: query
@@ -75,6 +67,18 @@ components:
       schema:
         type: string  
   schemas:
+    BelgianLanguage:
+      description: One of the official Belgian languages
+      type: string
+      enum:
+        - fr
+        - nl
+        - de
+    Language:
+      description: A language represented by an ISO-639-1 code
+      type: string
+      pattern: "^[a-z]{2}$"
+      example: "en"
     LongRunningTaskStatus:
       description: status of a long running task
       type: object
