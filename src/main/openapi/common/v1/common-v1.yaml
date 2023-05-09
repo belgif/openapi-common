@@ -16,34 +16,9 @@ paths:
       security: []
       responses:
         "200":
-          description: The service is UP or DEGRADED
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/HealthStatus"
-              examples:
-                responseUp:
-                  value:
-                    {
-                      "status": "UP"
-                    }
-                responseDegraded:
-                  value:
-                    {
-                      "status": "DEGRADED"
-                    }
+          "$ref": "#/components/responses/HealthUpOrDegradedResponse"
         "503":
-          description: The service is DOWN
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/HealthStatus"
-              examples:
-                responseDown:
-                  value:
-                    {
-                      "status": "DOWN"
-                    }
+          "$ref": "#/components/responses/HealthDownResponse"
         default:
           $ref: "../../problem/v1/problem-v1.yaml#/components/responses/ProblemResponse"
 components:
@@ -65,7 +40,39 @@ components:
       in: query
       name: select
       schema:
-        type: string  
+        type: string
+  responses:
+    HealthUpOrDegradedResponse:
+      description: The service is UP or DEGRADED
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/HealthStatus"
+          examples:
+            responseUp:
+              description: API is available
+              value:
+                {
+                  "status": "UP"
+                }
+            responseDegraded:
+              description: API is available, but with reduced functionality
+              value:
+                {
+                  "status": "DEGRADED"
+                }
+    HealthDownResponse:
+      description: The service is DOWN
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/HealthStatus"
+          examples:
+            responseDown:
+              value:
+                {
+                  "status": "DOWN"
+                }
   schemas:
     BelgianLanguage:
       description: One of the official Belgian languages
