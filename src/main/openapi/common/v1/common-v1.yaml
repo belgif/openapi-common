@@ -9,7 +9,6 @@ paths:
       tags:
         - Monitoring
       summary: Check health of the service
-      description: This resource is only available to supervision users
       operationId: checkHealth
       externalDocs:
         url: "https://www.belgif.be/specification/rest/api-guide/#health"
