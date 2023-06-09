@@ -74,7 +74,7 @@ components:
                 }
   schemas:
     BelgianLanguage:
-      description: One of the official Belgian languages
+      description: One of the official Belgian languages represented by an ISO-639-1 code
       type: string
       enum:
         - fr
