@@ -12,58 +12,24 @@ paths:
       tags:
         - Monitoring
       summary: Check health of the service
-      description: This resource is only available to supervision users
       operationId: checkHealth
       externalDocs:
         url: "https://www.belgif.be/specification/rest/api-guide/#health"
       security: []
       responses:
         "200":
-          description: The service is UP or DEGRADED
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/HealthStatus"
-              examples:
-                responseUp:
-                  value:
-                    {
-                      "status": "UP"
-                    }
-                responseDegraded:
-                  value:
-                    {
-                      "status": "DEGRADED"
-                    }
-        "500":
-          description: The service cannot generate a health response.
-          content:
-            application/json:
-              schema:
-                $ref: "../../problem/v1/problem-v1.yaml#/components/schemas/Problem"
+          "$ref": "#/components/responses/HealthUpOrDegradedResponse"
         "503":
-          description: The service is DOWN
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/HealthStatus"
-              examples:
-                responseDown:
-                  value:
-                    {
-                      "status": "DOWN"
-                    }
+          "$ref": "#/components/responses/HealthDownResponse"
+        default:
+          $ref: "../../problem/v1/problem-v1.yaml#/components/responses/ProblemResponse"
 components:
   parameters:
     LangQueryParameter:
       in: query
       name: lang
       schema:
-        type: string
-        enum:
-          - fr
-          - nl
-          - de
+        $ref: "#/components/schemas/BelgianLanguage"
     PageQueryParameter:
       description: Number of requested page in a paged resource collection. Page numbers are 1-based.
       in: query
@@ -76,8 +42,52 @@ components:
       in: query
       name: select
       schema:
-        type: string  
+        type: string
+  responses:
+    HealthUpOrDegradedResponse:
+      description: The service is UP or DEGRADED
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/HealthStatus"
+          examples:
+            responseUp:
+              description: API is available
+              value:
+                {
+                  "status": "UP"
+                }
+            responseDegraded:
+              description: API is available, but with reduced functionality
+              value:
+                {
+                  "status": "DEGRADED"
+                }
+    HealthDownResponse:
+      description: The service is DOWN
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/HealthStatus"
+          examples:
+            responseDown:
+              value:
+                {
+                  "status": "DOWN"
+                }
   schemas:
+    BelgianLanguage:
+      description: One of the official Belgian languages represented by an ISO-639-1 code
+      type: string
+      enum:
+        - fr
+        - nl
+        - de
+    Language:
+      description: A language represented by an ISO-639-1 code
+      type: string
+      pattern: "^[a-z]{2}$"
+      example: "en"
     LongRunningTaskStatus:
       description: status of a long running task
       type: object

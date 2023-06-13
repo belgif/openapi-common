@@ -11,7 +11,6 @@ paths:
       tags:
         - Monitoring
       summary: Check health of the service
-      description: This resource is only available to supervision users
       operationId: checkHealth
       externalDocs:
         url: "https://www.belgif.be/specification/rest/api-guide/#health"
@@ -28,10 +27,6 @@ paths:
               {
                 "status": "UP"
               }
-        "500":
-          description: The service cannot generate a health response.
-          schema:
-            $ref: "../../problem/v1/problem-v1.yaml#/definitions/Problem"
         "503":
           description: The service is DOWN
           schema:
@@ -42,6 +37,8 @@ paths:
                 "status": "DOWN"
               }
           }
+        default:
+          $ref: "../../problem/v1/problem-v1.yaml#/responses/ProblemResponse"
 parameters:
   LangQueryParameter:
     in: query
@@ -63,6 +60,18 @@ parameters:
     name: select
     type: string
 definitions:
+  BelgianLanguage:
+    description: One of the official Belgian languages
+    type: string
+    enum:
+      - fr
+      - nl
+      - de
+  Language:
+    description: A language represented by an ISO-639-1 code
+    type: string
+    pattern: "^[a-z]{2}$"
+    example: "en"
   LongRunningTaskStatus:
     description: status of a long running task
     type: object
