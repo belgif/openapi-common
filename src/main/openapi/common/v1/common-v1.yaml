@@ -43,6 +43,13 @@ components:
       name: select
       schema:
         type: string
+    IfNoneMatch:
+      description: RFC7232 header field that makes a GET or HEAD request method conditional.
+      in: header
+      name: If-None-Match
+      schema:
+        type: string
+      example: W/"xy", "5", "7da7a728-f910-11e6-942a-68f728c1ba70"
   responses:
     HealthUpOrDegradedResponse:
       description: The service is UP or DEGRADED
