@@ -1,4 +1,4 @@
-# openapi-common
+# openapi-common test
 
 This repository contains OpenAPI data types for common technical data like Uuid, HttpLink and LongRunningTaskStatus.
 Their use is documented in the [REST guide](https://www.gcloud.belgium.be/rest/).
