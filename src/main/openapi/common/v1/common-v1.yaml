@@ -167,3 +167,14 @@ components:
           type: string
       required:
         - status
+  headers:
+    Etag:
+      description: >
+        Identifier for a specific version of a resource.
+        The RFC7232 ETag header field in a response provides the current entity-
+        tag for the selected resource. An entity-tag is an opaque identifier for
+        different versions of a resource over time, regardless whether multiple
+        versions are valid at the same time. An entity-tag consists of an opaque
+        quoted string, possibly prefixed by a weakness indicator.
+      schema:
+        type: string
