@@ -1,3 +1,4 @@
+# Maven CI build for the belgif openapi projects
 name: openapi-maven-ci
 on:
   push:
