@@ -7,7 +7,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers: []
 paths:
-  /health:
+  /health: # copy this path instead of referencing it to modify security section. Operation may be secured, but access should be allowed to all clients.
     get:
       tags:
         - Monitoring
