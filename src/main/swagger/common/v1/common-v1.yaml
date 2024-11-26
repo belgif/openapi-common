@@ -128,6 +128,7 @@ definitions:
   MergePatch:
     description: JSON Merge Patch (RFC 7386) request body
     type: object
+    additionalProperties: true
     # Marker type as JSON Merge Patch requests can not be fully specified as a JSON Schema type
   SelfLink:
     description: A base type representing a link to the resource's own location within its representation
