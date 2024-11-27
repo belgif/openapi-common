@@ -142,9 +142,10 @@ components:
         de:
           type: string
     MergePatch:
+      deprecated: true # Define a specific schema for JSON Merge patch request body instead of using this marker type (see [doc-patch] rule)
       description: JSON Merge Patch (RFC 7386) request body
       type: object
-      # Marker type as JSON Merge Patch requests can not be fully specified as a JSON Schema type
+      additionalProperties: true
     SelfLink:
       description: A base type representing a link to the resource's own location within its representation
       type: object
