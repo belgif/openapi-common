@@ -117,6 +117,7 @@
 					<deploymentName>${project.artifactId}</deploymentName>
 					<autoPublish>true</autoPublish>
 					<waitUntil>published</waitUntil>
+					<waitMaxTime>3600</waitMaxTime>
 				</configuration>
 			</plugin>
 		</plugins>
