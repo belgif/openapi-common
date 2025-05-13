@@ -109,6 +109,19 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.sonatype.central</groupId>
+				<artifactId>central-publishing-maven-plugin</artifactId>
+				<version>0.7.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<publishingServerId>central</publishingServerId>
+					<deploymentName>${project.artifactId}</deploymentName>
+					<autoPublish>true</autoPublish>
+					<waitUntil>published</waitUntil>
+					<waitMaxTime>3600</waitMaxTime>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -150,16 +163,5 @@
 		<developerConnection>scm:git:ssh://github.com:belgif/openapi-common.git</developerConnection>
 		<url>https://github.com/belgif/openapi-common</url>
 	</scm>
-
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-		</repository>
-	</distributionManagement>
 
 </project>
