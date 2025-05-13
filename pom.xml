@@ -127,15 +127,7 @@
 		<dependency>
 			<groupId>io.github.belgif.openapi</groupId>
 			<artifactId>belgif-openapi-problem</artifactId>
-			<version>1.3.0</version>
-			<classifier>swagger</classifier>
-			<type>zip</type>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>io.github.belgif.openapi</groupId>
-			<artifactId>belgif-openapi-problem</artifactId>
-			<version>1.3.0</version>
+			<version>1.3.1</version>
 			<classifier>openapi</classifier>
 			<type>zip</type>
 			<optional>true</optional>
