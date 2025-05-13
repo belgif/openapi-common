@@ -5,8 +5,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-servers:
-  - url: /common/v1 # dummy URL, required for validator if paths are present
+x-reusable-definitions-only: true
 tags:
   - name: Monitoring
     description: Monitoring of the API
