@@ -46,6 +46,13 @@ components:
       name: select
       schema:
         type: string
+    IfNoneMatch:
+      description: RFC7232 header field that makes a GET or HEAD request method conditional.
+      in: header
+      name: If-None-Match
+      schema:
+        type: string
+      example: W/"xy", "5", "7da7a728-f910-11e6-942a-68f728c1ba70"
   responses:
     HealthUpOrDegradedResponse:
       description: The service is UP or DEGRADED
@@ -171,3 +178,14 @@ components:
           type: string
       required:
         - status
+  headers:
+    Etag:
+      description: >
+        Identifier for a specific version of a resource.
+        The RFC7232 ETag header field in a response provides the current entity-
+        tag for the selected resource. An entity-tag is an opaque identifier for
+        different versions of a resource over time, regardless whether multiple
+        versions are valid at the same time. An entity-tag consists of an opaque
+        quoted string, possibly prefixed by a weakness indicator.
+      schema:
+        type: string
