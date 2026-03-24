@@ -149,6 +149,11 @@ components:
       description: JSON Merge Patch (RFC 7386) request body
       type: object
       additionalProperties: true
+    PhoneNumber:
+      type: string
+      description: A phone number based on the E.164 format, starting with a `+` prefix, and followed by the country code (1 to 3 digits) and subscriber number (includes area code and local number)
+      pattern: '^\+[1-9]\d{6,14}$' # minimal length of 7 digits after the `+` with first digit not a 0
+      # For end-user input, it is recommended to accept a more characters (e.g. spaces, slashes, ...) before transforming to this format
     SelfLink:
       description: A base type representing a link to the resource's own location within its representation
       type: object
