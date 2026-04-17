@@ -19,6 +19,7 @@ components:
       name: pageSize
       schema:
         $ref: "#/components/schemas/PageSize"
+    # PageQueryParameter is defined in common-v1.yaml
   schemas:
     PageSize:
       description: Maximum number of items per page.
