@@ -18,7 +18,7 @@
 			<plugin>
 				<groupId>io.github.belgif.rest.guide.validator</groupId>
 				<artifactId>belgif-rest-guide-validator-maven-plugin</artifactId>
-				<version>3.2.2</version>
+				<version>3.3.0</version>
 				<executions>
 					<execution>
 						<goals>
@@ -29,6 +29,7 @@
 				<configuration>
 					<files>
 						<file>src/main/openapi/common/v1/common-v1.yaml</file>
+						<file>src/test/openapi/Pagination.yaml</file>
 					</files>
 				</configuration>
 			</plugin>
