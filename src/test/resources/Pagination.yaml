@@ -12,26 +12,27 @@ externalDocs:
   url: https://www.belgif.be/specification/rest/api-guide/#pagination
 paths: {}
 components:
-  PageSizeQueryParameter: # support for a page size chosen by client is OPTIONAL
-    description: Maximum number of items per page desired by client
-    in: query
-    name: pageSize
-    schema:
+  parameters:
+    PageSizeQueryParameter: # support for a page size chosen by client is OPTIONAL
+      description: Maximum number of items per page desired by client
+      in: query
+      name: pageSize
+      schema:
+        $ref: "#/components/schemas/PageSize"
+  schemas:
+    PageSize:
+      description: Maximum number of items per page.
       type: integer
       format: int32
       minimum: 10  # minimum, maximum and default values should be determined during API design
       maximum: 100
       default: 20   # MUST have a default value when query parameter is absent
-  schemas:
     OffsetPaginationCollection:
       type: object
       description: Base type for collection resources using offset-based pagination.
       properties:
         pageSize: # support for this property is RECOMMENDED
-          description: Maximum number of items per page.
-          type: integer
-          format: int32
-          minimum: 1
+          $ref: "#/components/schemas/PageSize"
         page: # support for this property is MANDATORY
           description: Index of the current page of items (1-based).
           type: integer
