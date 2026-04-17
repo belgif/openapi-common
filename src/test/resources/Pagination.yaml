@@ -1,0 +1,76 @@
+openapi: 3.0.0
+info:
+  title: Example components for pagination
+  version: "${project.version}"
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  description: >
+    Components serve only as example. 
+    They should be copied to your API and modified according to which pagination parameters are supported by the API.
+externalDocs:
+  url: https://www.belgif.be/specification/rest/api-guide/#pagination
+paths: {}
+components:
+  PageSizeQueryParameter: # support for a page size chosen by client is OPTIONAL
+    description: Maximum number of items per page desired by client
+    in: query
+    name: pageSize
+    schema:
+      type: integer
+      format: int32
+      minimum: 10  # minimum, maximum and default values should be determined during API design
+      maximum: 100
+      default: 20   # MUST have a default value when query parameter is absent
+  schemas:
+    OffsetPaginationCollection:
+      type: object
+      description: Base type for collection resources using offset-based pagination.
+      properties:
+        pageSize: # support for this property is RECOMMENDED
+          description: Maximum number of items per page.
+          type: integer
+          format: int32
+          minimum: 1
+        page: # support for this property is MANDATORY
+          description: Index of the current page of items (1-based).
+          type: integer
+          format: int32
+          minimum: 1
+        total:   # support for this property is OPTIONAL
+          description: >
+            Total number of items across all pages.
+            If query parameters are used to filter the result set, this is the total of the collection result set, not of the entire collection.
+          type: integer
+          format: int64
+          minimum: 0
+        first:  # support for this property is OPTIONAL
+          description: Hyperlink to the first page.
+          type: string
+          format: uri
+        prev: # support for this property is OPTIONAL
+          description: Hyperlink to the previous page.
+          type: string
+          format: uri
+        last:  # support for this property is OPTIONAL
+          description: Hyperlink to the last page.
+          type: string
+          format: uri
+        next: # property MUST be supported, and present except on last page
+          description: Hyperlink to the next page.
+          type: string
+          format: uri
+      required: # the listed properties, if supported by the API, are required in every response
+        - pageSize
+        - page
+        - total
+        - first
+        - last
+      example:
+        pageSize: 20
+        page: 5
+        total: 195
+        first: "https://api.example.org/demo/v1/pets?pageSize=20&page=1"
+        prev: "https://api.example.org/demo/v1/pets?pageSize=20&page=4"
+        last: "https://api.example.org/demo/v1/pets?pageSize=20&page=10"
+        next: "https://api.example.org/demo/v1/pets?pageSize=20&page=6"
