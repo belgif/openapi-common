@@ -29,6 +29,7 @@
 				<configuration>
 					<files>
 						<file>src/main/openapi/common/v1/common-v1.yaml</file>
+						<file>src/test/openapi/Pagination.yaml</file>
 					</files>
 				</configuration>
 			</plugin>

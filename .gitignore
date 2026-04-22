@@ -3,3 +3,4 @@
 .project
 /src/main/**/problem
 /.idea/
+/belgif-openapi-common.iml
