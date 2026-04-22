@@ -37,7 +37,6 @@ components:
         page: # support for this property is MANDATORY
           description: Index of the current page of items (1-based).
           type: integer
-          format: int32
           minimum: 1
         total:   # support for this property is OPTIONAL
           description: >
