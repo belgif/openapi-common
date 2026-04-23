@@ -43,7 +43,7 @@ components:
       name: select
       schema:
         type: string
-    IfNoneMatch:
+    IfNoneMatchHeaderParameter:
       description: >
         Only execute the request on a resource if its ETag does not match one of the given values (RFC 9110).
         The value can be a comma-separated list of ETag values. 
@@ -183,7 +183,7 @@ components:
       required:
         - status
   headers:
-    Etag:
+    EtagHeader:
       description: >
         An entity tag is an opaque identifier for differentiating between multiple representations (versions or variants) of the same resource.
         It consists of an opaque quoted string, possibly prefixed by a weakness indicator.
