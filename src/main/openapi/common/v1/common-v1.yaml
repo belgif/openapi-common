@@ -44,12 +44,20 @@ components:
       schema:
         type: string
     IfNoneMatch:
-      description: RFC7232 header field that makes a GET or HEAD request method conditional.
+      description: >
+        Only execute the request on a resource if its ETag does not match one of the given values (RFC 9110).
+        The value can be a comma-separated list of ETag values. 
+        When using the `*` wildcard value, the request will only be executed if the resource doesn't exist.
       in: header
       name: If-None-Match
       schema:
-        type: string
-      example: W/"xy", "5", "7da7a728-f910-11e6-942a-68f728c1ba70"
+        type: array
+        items:
+          type: string
+          pattern: '^(W\/)?"[!#-~]*"$|^\*$'
+      example: ['W/"xy"', '"5"', '"7da7a728-f910-11e6-942a-68f728c1ba70"']
+      # serialized as HTTP header this becomas: W/"xy", "5", "7da7a728-f910-11e6-942a-68f728c1ba70"
+      # if using the wildcard value '*', it must be the only item in the array
   responses:
     HealthUpOrDegradedResponse:
       description: The service is UP or DEGRADED
@@ -177,11 +185,8 @@ components:
   headers:
     Etag:
       description: >
-        Identifier for a specific version of a resource.
-        The RFC7232 ETag header field in a response provides the current entity-
-        tag for the selected resource. An entity-tag is an opaque identifier for
-        different versions of a resource over time, regardless whether multiple
-        versions are valid at the same time. An entity-tag consists of an opaque
-        quoted string, possibly prefixed by a weakness indicator.
+        An entity tag is an opaque identifier for differentiating between multiple representations (versions or variants) of the same resource.
+        It consists of an opaque quoted string, possibly prefixed by a weakness indicator.
       schema:
         type: string
+        pattern: '^(W\/)?"[!#-~]*"$'
