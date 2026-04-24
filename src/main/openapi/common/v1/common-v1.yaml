@@ -9,6 +9,8 @@ servers: []
 paths:
   /health:
     get:
+      parameters:
+        - $ref: "#/components/parameters/IfNoneMatchHeaderParameter"
       tags:
         - Monitoring
       summary: Check health of the service
@@ -51,13 +53,13 @@ components:
       in: header
       name: If-None-Match
       schema:
+        # the array is serialized as a comma-separated list of entity tags
+        # if using the wildcard value *, it must be the only item in the array
         type: array
         items:
           type: string
-          pattern: '^(W\/)?"[!#-~]*"$|^\*$'
-      example: 'W/"xy", "5", "7da7a728-f910-11e6-942a-68f728c1ba70"'
-      # array is serialized as comma-separated list of entity tags"
-      # if using the wildcard value '*', it must be the only item in the array
+        example:
+          [ 'W/"xy"', '"5"', '"7da7a728-f910-11e6-942a-68f728c1ba70"']
   responses:
     HealthUpOrDegradedResponse:
       description: The service is UP or DEGRADED
