@@ -214,7 +214,7 @@ components:
     LocationRedirectionHeader:
       # header name: `Location`
       description: >
-        The target of a redirection
+        The target of redirection
       schema:
         type: string
         format: uri # only absolute URLs as recommended by the Belgif REST guide
