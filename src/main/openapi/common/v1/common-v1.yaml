@@ -12,6 +12,8 @@ tags:
 paths:
   /health: # Operation may be secured, but access should be allowed to all clients. In order to add a security scheme, copy this definition instead of referencing it.
     get:
+      parameters:
+        - $ref: "#/components/parameters/IfNoneMatchHeaderParameter"
       tags:
         - Monitoring
       summary: Check health of the service
@@ -46,6 +48,29 @@ components:
       name: select
       schema:
         type: string
+    IfNoneMatchHeaderParameter:
+      description: >
+        Only execute the request on a resource if its ETag does not match one of the given values (RFC 9110).
+        The value can be a comma-separated list of ETag values. 
+        When using the `*` wildcard value, the request will only be executed if the resource doesn't exist.
+      in: header
+      name: If-None-Match
+      schema:
+        # the array is serialized as a comma-separated list of entity tags
+        # if using the wildcard value *, it must be the only item in the array
+        type: array
+        items:
+          type: string
+          pattern: '^(\*|(W\/)?"[!#-~]*")$'
+        example:
+          [ 'W/"xy"', '"5"', '"7da7a728-f910-11e6-942a-68f728c1ba70"']
+    CacheControlHeaderParameter:
+      description: A comma-separated list of caching directives for use in a request, as defined in RFC 9111.
+      schema:
+        type: array
+        items:
+          type: string
+        example: ['no-cache', 'no-store']
   responses:
     HealthUpOrDegradedResponse:
       description: The service is UP or DEGRADED
@@ -177,3 +202,55 @@ components:
           type: string
       required:
         - status
+  headers:
+    # the header names are included in comments, but are not part of the header definition as they are defined in the `headers` object of the response
+
+    EtagHeader:
+      # header name: `ETag`
+      description: >
+        An entity tag is an opaque identifier for differentiating between multiple representations (versions or variants) of the same resource.
+        It consists of an opaque quoted string, possibly prefixed by a weakness indicator.
+      schema:
+        type: string
+        pattern: '^(W\/)?"[!#-~]*"$'
+        example: 'W/"123"'
+    LocationCreatedResourceHeader:
+      # header name: `Location`
+      description: >
+        The URL of the new resource that has been created
+      schema:
+        type: string
+        format: uri # only absolute URLs as recommended by the Belgif REST guide
+    LocationRedirectionHeader:
+      # header name: `Location`
+      description: >
+        The target of redirection
+      schema:
+        type: string
+        format: uri # only absolute URLs as recommended by the Belgif REST guide
+    RetryAfterHeader:
+      # header name: `Retry-After`
+      description: >
+        A hint indicating how long the user agent should wait before making a new request.
+        Either an integer indicating the seconds to delay of the response is received, or a date and time in 'HTTP date' format
+      schema:
+        type: string
+        example: 'Wed, 21 Oct 2015 07:28:00 GMT'
+    CacheControlHeader:
+      # header name: `Cache-Control`
+      description: A comma-separated list of caching directives for use in response, as defined in RFC 9111.
+      schema:
+        type: array
+        items:
+          type: string
+        example: ['no-cache', 'no-store', 'must-revalidate']
+    VaryHeader:
+      # header name: `Vary`
+      description: >
+        A comma-separated list of header field names that are used to determine whether a cached response can be used rather than requesting a fresh one from the origin server, as defined in RFC 9111.
+      schema:
+        type: array
+        items:
+          type: string
+          # if a wildcard value is used, it must be the only item in the array. However, using Cache-Control: no-cache is preferred over using Vary: *
+        example: ['Accept-Language', 'Accept-Encoding']
