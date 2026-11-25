@@ -9,8 +9,6 @@ servers: []
 paths:
   /health:
     get:
-      parameters:
-        - $ref: "#/components/parameters/IfNoneMatchHeaderParameter"
       tags:
         - Monitoring
       summary: Check health of the service
@@ -63,6 +61,8 @@ components:
           [ 'W/"xy"', '"5"', '"7da7a728-f910-11e6-942a-68f728c1ba70"']
     CacheControlHeaderParameter:
       description: A comma-separated list of caching directives for use in a request, as defined in RFC 9111.
+      in: header
+      name: Cache-Control
       schema:
         type: array
         items:
