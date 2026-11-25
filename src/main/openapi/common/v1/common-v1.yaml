@@ -206,15 +206,13 @@ components:
         example: 'W/"123"'
     LocationCreatedResourceHeader:
       # header name: `Location`
-      description: >
-        The URL of the new resource that has been created
+      description: The URL of the new resource that has been created
       schema:
         type: string
         format: uri # only absolute URLs as recommended by the Belgif REST guide
     LocationRedirectionHeader:
       # header name: `Location`
-      description: >
-        The target of redirection
+      description: The target of redirection
       schema:
         type: string
         format: uri # only absolute URLs as recommended by the Belgif REST guide
